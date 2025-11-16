@@ -1,122 +1,138 @@
-# n8n Workflows — Advanced Automation Suite
+# ⚡ SIAG Software — Advanced n8n Workflows
 
-Production-grade automation examples powered by **n8n**, **Python**, and modern cloud services.  
-This repository contains real-world, business-ready workflows used across SIAG Software projects.
+This repository contains a curated set of **production-ready n8n workflows**, built as real examples of how SIAG Software designs automation pipelines for modern businesses.
 
-Includes:
-- Lead intake pipelines  
-- Scraping & monitoring flows  
-- Customer notification systems  
-- Helper scripts for Python-node integration  
+These workflows demonstrate clean structure, reusable logic, and clear patterns for integrating APIs, scrapers, CRMs, notification systems, and Python helpers.
 
-This suite is designed to show how SIAG Software builds **scalable**, **transparent**, and **robust** automations.
+---
+
+## 🚀 Features
+
+- Ready-to-import **n8n workflows** (`.json`)
+- Clean architecture diagrams
+- API consumption + Google Sheets pipelines
+- Web scraping → processing → export flows
+- Notification workflows (email / webhook)
+- Python helper script for custom logic
+- Professional folder structure
 
 ---
 
 ## 📁 Repository Structure
 
-```
 n8n-workflows-advanced/
 │
 ├── workflows/
-│   ├── lead_pipeline.json
-│   ├── scraping_pipeline.json
-│   └── notifications_pipeline.json
+│ ├── lead_pipeline.json
+│ ├── scraping_pipeline.json
+│ └── notifications_pipeline.json
 │
 ├── scripts/
-│   └── python_helper.py
+│ └── python_helper.py
 │
 ├── docs/
-│   ├── architecture.png
-│   ├── diagram_leads.png
-│   ├── diagram_scraping.png
-│   └── diagram_notifications.png
+│ ├── architecture.png
+│ ├── diagram_leads.png
+│ ├── diagram_scraping.png
+│ └── diagram_notifications.png
 │
-├── README.md
-└── LICENSE
-```
+└── README.md
+
+yaml
+Copiar código
 
 ---
 
-# 🚀 Workflows Included
+## 🧠 Architecture Overview
 
-## 1. 📩 Lead Pipeline (Webhook → CRM → Telegram)
-**Purpose:** Capture leads, sanitize them, enrich data, and notify your CRM + Telegram channel.
+A high-level view of how all workflow components interact:
 
-**Key components:**
-- Webhook trigger  
-- Email/phone sanitizer  
-- CRM integration (HubSpot, Airtable, Notion or custom API)  
-- Telegram/WhatsApp notifications  
-- Branching logic for multi-form input  
-
-File: `workflows/lead_pipeline.json`
+![Architecture](docs/architecture.png)
 
 ---
 
-## 2. 🕷 Web Scraping Pipeline (Cron → Python → API → Email Report)
-**Purpose:** Run scheduled (cron) extractions, process data through Python, and send summary reports.
+## 📨 Lead Pipeline Workflow
 
-**Key components:**
-- Cron trigger  
-- Python function node  
-- HTTP Request node (API submission)  
-- Email/SMS notification  
-- Error-handling fallback path  
+Automates a full lead lifecycle:
+- Capture / fetch leads  
+- Normalize data  
+- Store in Google Sheets or any CRM  
+- Trigger notifications  
 
-File: `workflows/scraping_pipeline.json`
+![Lead Pipeline](docs/diagram_leads.png)
 
----
-
-## 3. 🔔 Customer Notification System  
-**Purpose:** Notify customers automatically depending on rules (status changes, delays, payments).
-
-**Key components:**
-- Webhook/API trigger  
-- Conditional branches  
-- Multi-channel notification: Email / WhatsApp / SMS  
-- Logging with Google Sheets / DB  
-
-File: `workflows/notifications_pipeline.json`
+Workflow file:  
+👉 `workflows/lead_pipeline.json`
 
 ---
 
-# 🧩 Helper Script (Python)
+## 🕸️ Scraping Pipeline Workflow
 
-Located in `scripts/python_helper.py`
+End-to-end automated scraping system:
+- Fetch data from dynamic or static pages  
+- Process + transform data  
+- Store or deliver results  
 
-Example usage:  
-- data cleaning  
-- scraping  
-- classification  
-- API enrichment  
+![Scraping Pipeline](docs/diagram_scraping.png)
 
-Compatible with the **n8n Python Function node**.
-
----
-
-# 🔧 Requirements
-
-No global installs needed.  
-Just import the JSON workflows into your n8n instance.
-
-Python helper uses:
-- `requests`
-- `beautifulsoup4`
-- `pydantic`
-- `lxml`
+Workflow file:  
+👉 `workflows/scraping_pipeline.json`
 
 ---
 
-# 📘 License — MIT
+## 🔔 Notification System Workflow
 
-This project is open-source under the MIT License.  
-Feel free to modify and use in your own automations.
+Reusable notification engine:
+- Multi-channel (email, webhook, messaging)  
+- Adjustable triggers  
+- Built for extensibility  
+
+![Notifications Pipeline](docs/diagram_notifications.png)
+
+Workflow file:  
+👉 `workflows/notifications_pipeline.json`
 
 ---
 
-# 🌐 About SIAG Software
+## 🛠️ Python Helper
 
-SIAG Software builds AI-driven tools, automation workflows, chatbots, and full-stack solutions for modern businesses.
+A small utility script for use inside n8n via the **Execute Command** or **HTTP Request** node.
 
-**Contact:** siag.software@protonmail.com
+Located in:  
+`/scripts/python_helper.py`
+
+---
+
+## 📦 Importing Workflows into n8n
+
+1. Open your n8n instance  
+2. Go to **Settings → Import**  
+3. Select any `.json` workflow  
+4. Save and activate  
+5. Customize nodes (API keys, URLs, credentials)
+
+All workflows are modular and editable.
+
+---
+
+## 📄 License — MIT
+
+This repository is distributed under the **MIT License**.
+
+Commercial use allowed.  
+Attribution to SIAG Software appreciated.
+
+---
+
+## 🌐 About SIAG Software
+
+We build:
+- AI chatbots  
+- Workflow automation  
+- Full-stack web systems  
+- Advanced scrapers  
+- Business intelligence tools  
+
+**Contact:** siag.software@protonmail.com  
+Website coming soon.
+
