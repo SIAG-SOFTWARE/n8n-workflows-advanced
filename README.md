@@ -20,26 +20,26 @@ These workflows demonstrate clean structure, reusable logic, and clear patterns 
 
 ## 📁 Repository Structure
 
+```
 n8n-workflows-advanced/
 │
 ├── workflows/
-│ ├── lead_pipeline.json
-│ ├── scraping_pipeline.json
-│ └── notifications_pipeline.json
+│   ├── lead_pipeline.json
+│   ├── scraping_pipeline.json
+│   └── notifications_pipeline.json
 │
 ├── scripts/
-│ └── python_helper.py
+│   └── python_helper.py
 │
 ├── docs/
-│ ├── architecture.png
-│ ├── diagram_leads.png
-│ ├── diagram_scraping.png
-│ └── diagram_notifications.png
+│   ├── architecture.png
+│   ├── diagram_leads.png
+│   ├── diagram_scraping.png
+│   └── diagram_notifications.png
 │
-└── README.md
-
-yaml
-Copiar código
+├── README.md
+└── LICENSE
+```
 
 ---
 
