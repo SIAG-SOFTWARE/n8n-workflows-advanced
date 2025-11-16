@@ -1,0 +1,39 @@
+{
+  "name": "SIAG Customer Notifications",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [{ "value1": "={{$json.status}}", "value2": "delayed" }]
+        }
+      },
+      "name": "Check Status",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [500, 200]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bot@siag.software",
+        "toEmail": "={{$json.email}}",
+        "subject": "Your order is delayed",
+        "text": "We apologize — your order has been delayed."
+      },
+      "name": "Email Notice",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [800, 100]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Check Status", "type": "main", "index": 0 }]] },
+    "Check Status": { "main": [[{ "node": "Email Notice", "type": "main", "index": 0 }]] }
+  }
+}
