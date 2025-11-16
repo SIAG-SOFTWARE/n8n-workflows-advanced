@@ -1,0 +1,49 @@
+{
+  "name": "SIAG Lead Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 250]
+    },
+    {
+      "parameters": {
+        "operation": "trim",
+        "value": "={{$json.email}}"
+      },
+      "name": "Email Sanitizer",
+      "type": "n8n-nodes-base.textManipulation",
+      "typeVersion": 1,
+      "position": [500, 250]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://your-crm-api.com/leads",
+        "sendBody": true,
+        "bodyParametersJson": "={\"email\": $json.email, \"name\": $json.name }"
+      },
+      "name": "Send to CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [800, 250]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT",
+        "text": "New lead arrived: {{$json.email}}"
+      },
+      "name": "Telegram Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1100, 250]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Email Sanitizer", "type": "main", "index": 0 }]] },
+    "Email Sanitizer": { "main": [[{ "node": "Send to CRM", "type": "main", "index": 0 }]] },
+    "Send to CRM": { "main": [[{ "node": "Telegram Notify", "type": "main", "index": 0 }]] }
+  }
+}
