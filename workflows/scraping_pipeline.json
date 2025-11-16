@@ -1,0 +1,37 @@
+{
+  "name": "SIAG Scraping Pipeline",
+  "nodes": [
+    {
+      "parameters": { "mode": "custom", "cronExpression": "0 */6 * * *" },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [200, 350]
+    },
+    {
+      "parameters": {
+        "functionCode": "import requests\nfrom bs4 import BeautifulSoup\n\nurl = 'https://news.ycombinator.com'\nhtml = requests.get(url).text\nsoup = BeautifulSoup(html, 'lxml')\n\nitems = [a.text for a in soup.select('.titleline a')][:10]\nreturn [{\"top_news\": items}]"
+      },
+      "name": "Python Scraper",
+      "type": "n8n-nodes-base.pythonFunction",
+      "typeVersion": 1,
+      "position": [500, 350]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bot@siag.software",
+        "toEmail": "your_email",
+        "subject": "Scraping Update",
+        "text": "={{JSON.stringify($json)}}"
+      },
+      "name": "Send Email Summary",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [800, 350]
+    }
+  ],
+  "connections": {
+    "Cron": { "main": [[{ "node": "Python Scraper", "type": "main", "index": 0 }]] },
+    "Python Scraper": { "main": [[{ "node": "Send Email Summary", "type": "main", "index": 0 }]] }
+  }
+}
